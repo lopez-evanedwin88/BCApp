@@ -5,6 +5,19 @@ const globalStyles = StyleSheet.create({
   flex1: {
     flex: 1,
   },
+  marginVertical10: {
+    marginVertical: 10,
+  },
+  width100p: {
+    width: '100%',
+  },
+  padding8: {
+    paddingHorizontal: 8,
+    paddingVertical: 8,
+  },
+  flexDirectionRow: {
+    flexDirection: 'row',
+  },
 });
 
 export default globalStyles;
