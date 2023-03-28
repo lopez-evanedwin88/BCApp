@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {Alert, Image, TextInput, View} from 'react-native';
 import {BSON} from 'realm';
 import Button from '../../components/Button';
+import {Mode} from '../../constants/enums/Route';
 import Images from '../../constants/Images';
 import Person from '../../realm/models/Person';
 import {RealmContext} from '../../realm/realmConfig';
@@ -9,12 +10,9 @@ import {color} from '../../styles/Base';
 import globalStyles from '../../styles/GlobalStyles';
 import styles from './styles';
 
-const ItemScreen = ({navigation}: {navigation: any}) => {
+const ItemScreen = ({navigation, route}: {navigation: any; route: any}) => {
   const {useRealm} = RealmContext;
   const realm = useRealm();
-  useEffect(() => {
-    navigation.setOptions({title: 'Add Business Card'});
-  }, [navigation]);
 
   const [name, setName] = useState('');
   const [occupation, setOccupation] = useState('');
@@ -22,6 +20,24 @@ const ItemScreen = ({navigation}: {navigation: any}) => {
   const [email, setEmail] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const [linkedIn, setLinkedIn] = useState('');
+
+  const [mode, setMode] = useState(true);
+
+  useEffect(() => {
+    navigation.setOptions({title: 'Add Business Card'});
+  }, [navigation]);
+
+  useLayoutEffect(() => {
+    if (route.params.mode === Mode.VIEW) {
+      setMode(false);
+      setName(route.params.person.name || ' ');
+      setOccupation(route.params.person.occupation || ' ');
+      setCompany(route.params.person.company || ' ');
+      setEmail(route.params.person.email_address || ' ');
+      setContactNumber(route.params.person.phone_number || ' ');
+      setLinkedIn(route.params.person.linkedIn_URL || ' ');
+    }
+  }, [route]);
 
   const save = () => {
     if (!name) {
@@ -100,6 +116,8 @@ const ItemScreen = ({navigation}: {navigation: any}) => {
           onChangeText={text => setName(text)}
           autoCorrect={false}
           autoCapitalize={'none'}
+          editable={mode}
+          selectTextOnFocus={mode}
         />
       </View>
       <View style={[globalStyles.flexDirectionRow, styles.txtInputStyleView]}>
@@ -115,6 +133,8 @@ const ItemScreen = ({navigation}: {navigation: any}) => {
           onChangeText={text => setOccupation(text)}
           autoCorrect={false}
           autoCapitalize={'none'}
+          editable={mode}
+          selectTextOnFocus={mode}
         />
       </View>
       <View style={[globalStyles.flexDirectionRow, styles.txtInputStyleView]}>
@@ -130,6 +150,8 @@ const ItemScreen = ({navigation}: {navigation: any}) => {
           onChangeText={text => setCompany(text)}
           autoCorrect={false}
           autoCapitalize={'none'}
+          editable={mode}
+          selectTextOnFocus={mode}
         />
       </View>
       <View style={[globalStyles.flexDirectionRow, styles.txtInputStyleView]}>
@@ -145,6 +167,8 @@ const ItemScreen = ({navigation}: {navigation: any}) => {
           onChangeText={text => setEmail(text)}
           autoCorrect={false}
           autoCapitalize={'none'}
+          editable={mode}
+          selectTextOnFocus={mode}
         />
       </View>
       <View style={[globalStyles.flexDirectionRow, styles.txtInputStyleView]}>
@@ -160,6 +184,8 @@ const ItemScreen = ({navigation}: {navigation: any}) => {
           onChangeText={text => setContactNumber(text)}
           autoCorrect={false}
           autoCapitalize={'none'}
+          editable={mode}
+          selectTextOnFocus={mode}
         />
       </View>
       <View style={[globalStyles.flexDirectionRow, styles.txtInputStyleView]}>
@@ -175,15 +201,28 @@ const ItemScreen = ({navigation}: {navigation: any}) => {
           onChangeText={text => setLinkedIn(text)}
           autoCorrect={false}
           autoCapitalize={'none'}
+          editable={mode}
+          selectTextOnFocus={mode}
         />
       </View>
-      <View style={globalStyles.padding8}>
-        <Button
-          style={{backgroundColor: color.green}}
-          title="Save"
-          onPress={save}
-        />
-      </View>
+      {mode && (
+        <View style={globalStyles.padding8}>
+          <Button
+            style={{backgroundColor: color.green}}
+            title="Save"
+            onPress={save}
+          />
+        </View>
+      )}
+      {!mode && (
+        <View style={globalStyles.padding8}>
+          <Button
+            style={{backgroundColor: color.red}}
+            title="Delete Business Card"
+            onPress={() => {}}
+          />
+        </View>
+      )}
     </View>
   );
 };

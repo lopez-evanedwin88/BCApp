@@ -4,6 +4,7 @@ export const color = {
   black2: '#000000',
   transparent: 'transparent',
   gray: 'gray',
+  red: 'red',
 };
 
 export const fonts = {

@@ -6,11 +6,11 @@ import {
   ImageBackground,
   RefreshControl,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
-import {BSON} from 'realm';
 import Button from '../../components/Button';
-import {Route} from '../../constants/enums/Route';
+import {Route, Mode} from '../../constants/enums/Route';
 import Images from '../../constants/Images';
 import Person from '../../realm/models/Person';
 import {RealmContext} from '../../realm/realmConfig';
@@ -18,51 +18,55 @@ import {color} from '../../styles/Base';
 import globalStyles from '../../styles/GlobalStyles';
 import styles from './styles';
 
-const renderItem = ({item}: any) => (
-  <ImageBackground source={Images.card_background} resizeMode="cover">
-    <View style={globalStyles.padding8}>
-      <View style={globalStyles.flexDirectionRow}>
-        <Image
-          resizeMode="contain"
-          source={Images.arrow_right}
-          style={styles.imageStyle}
-        />
-        <View style={styles.itemViews}>
-          <Text style={styles.itemViewName}>{item.name}</Text>
-          <Text style={styles.itemViewSubName}>
-            {item.occupation} @ {item.company}
-          </Text>
-        </View>
-      </View>
-      <View style={globalStyles.flexDirectionRow}>
-        <Image
-          resizeMode="contain"
-          source={Images.email}
-          style={[styles.imageStyle, {height: 30}]}
-        />
-        <View style={styles.itemViews}>
-          <Text>{item.email_address}</Text>
-        </View>
-      </View>
-      <View style={globalStyles.flexDirectionRow}>
-        <Image
-          resizeMode="contain"
-          source={Images.contact}
-          style={[styles.imageStyle, {height: 20}]}
-        />
-        <View style={styles.itemViews}>
-          <Text>{item.phone_number}</Text>
-        </View>
-      </View>
-      <View style={styles.lineStyle} />
-    </View>
-  </ImageBackground>
-);
-
 const MainScreen = ({navigation}: {navigation: any}) => {
   const {useQuery} = RealmContext;
   const persons: any = useQuery(Person).sorted('created_at', true);
 
+  const renderItem = ({item}: any) => (
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate(Route.ITEM_SCREEN, {mode: Mode.VIEW, person: item})
+      }>
+      <ImageBackground source={Images.card_background} resizeMode="cover">
+        <View style={globalStyles.padding8}>
+          <View style={globalStyles.flexDirectionRow}>
+            <Image
+              resizeMode="contain"
+              source={Images.arrow_right}
+              style={styles.imageStyle}
+            />
+            <View style={styles.itemViews}>
+              <Text style={styles.itemViewName}>{item.name}</Text>
+              <Text style={styles.itemViewSubName}>
+                {item.occupation} @ {item.company}
+              </Text>
+            </View>
+          </View>
+          <View style={globalStyles.flexDirectionRow}>
+            <Image
+              resizeMode="contain"
+              source={Images.email}
+              style={[styles.imageStyle, {height: 30}]}
+            />
+            <View style={styles.itemViews}>
+              <Text>{item.email_address}</Text>
+            </View>
+          </View>
+          <View style={globalStyles.flexDirectionRow}>
+            <Image
+              resizeMode="contain"
+              source={Images.contact}
+              style={[styles.imageStyle, {height: 20}]}
+            />
+            <View style={styles.itemViews}>
+              <Text>{item.phone_number}</Text>
+            </View>
+          </View>
+          <View style={styles.lineStyle} />
+        </View>
+      </ImageBackground>
+    </TouchableOpacity>
+  );
   return (
     <View style={[globalStyles.flex1, {backgroundColor: color.white}]}>
       {persons.length !== 0 ? (
@@ -93,7 +97,7 @@ const MainScreen = ({navigation}: {navigation: any}) => {
         <Button
           title="Add Business Card"
           onPress={() => {
-            navigation.navigate(Route.ITEM_SCREEN, {});
+            navigation.navigate(Route.ITEM_SCREEN, {mode: Mode.NEW});
           }}
         />
       </View>
