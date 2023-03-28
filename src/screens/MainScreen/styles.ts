@@ -24,6 +24,15 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 16,
   },
+  emptyTextStyleView: {
+    flex: 1,
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
+  emptyTextStyle: {
+    fontSize: fonts.lg,
+    color: 'gray',
+  },
 });
 
 export default styles;

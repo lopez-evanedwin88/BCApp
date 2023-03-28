@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {BSON} from 'realm';
 import Button from '../../components/Button';
+import {Route} from '../../constants/enums/Route';
 import Images from '../../constants/Images';
 import Person from '../../realm/models/Person';
 import {RealmContext} from '../../realm/realmConfig';
@@ -116,26 +117,37 @@ const MainScreen = ({navigation}: {navigation: any}) => {
 
   return (
     <View style={[globalStyles.flex1, {backgroundColor: color.white}]}>
-      <FlatList
-        refreshing={false}
-        scrollEnabled={true}
-        style={[globalStyles.width100p]}
-        data={persons}
-        onEndReached={() => {}}
-        onEndReachedThreshold={0}
-        renderItem={renderItem}
-        refreshControl={
-          <RefreshControl refreshing={false} onRefresh={() => {}} />
-        }
-        ListFooterComponent={
-          <ActivityIndicator
-            style={globalStyles.marginVertical10}
-            animating={false}
-          />
-        }
-      />
+      {persons.length !== 0 ? (
+        <FlatList
+          refreshing={false}
+          scrollEnabled={true}
+          style={[globalStyles.width100p]}
+          data={persons}
+          onEndReached={() => {}}
+          onEndReachedThreshold={0}
+          renderItem={renderItem}
+          refreshControl={
+            <RefreshControl refreshing={false} onRefresh={() => {}} />
+          }
+          ListFooterComponent={
+            <ActivityIndicator
+              style={globalStyles.marginVertical10}
+              animating={false}
+            />
+          }
+        />
+      ) : (
+        <View style={styles.emptyTextStyleView}>
+          <Text style={styles.emptyTextStyle}>List is empty</Text>
+        </View>
+      )}
       <View style={styles.btnBusinessStyle}>
-        <Button title="Add Business Card" onPress={() => {}} />
+        <Button
+          title="Add Business Card"
+          onPress={() => {
+            navigation.navigate(Route.ITEM_SCREEN, {});
+          }}
+        />
       </View>
     </View>
   );
