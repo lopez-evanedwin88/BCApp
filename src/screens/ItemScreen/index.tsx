@@ -96,6 +96,45 @@ const ItemScreen = ({navigation, route}: {navigation: any; route: any}) => {
     });
   };
 
+  const deletePerson = () => {
+    Alert.alert(
+      'Confirmation',
+      'Are you sure you want to delete this record?',
+      [
+        {
+          text: 'Yes',
+          onPress: () => {
+            realm.write(() => {
+              realm.delete(route.params.person);
+            });
+            Alert.alert(
+              'Succesfully removed',
+              '',
+              [
+                {
+                  text: 'OK',
+                  onPress: () => navigation.goBack(),
+                  style: 'default',
+                },
+              ],
+              {
+                cancelable: false,
+              },
+            );
+          },
+          style: 'default',
+        },
+        {
+          text: 'No',
+          style: 'cancel',
+        },
+      ],
+      {
+        cancelable: false,
+      },
+    );
+  };
+
   return (
     <View
       style={[
@@ -219,7 +258,7 @@ const ItemScreen = ({navigation, route}: {navigation: any; route: any}) => {
           <Button
             style={{backgroundColor: color.red}}
             title="Delete Business Card"
-            onPress={() => {}}
+            onPress={deletePerson}
           />
         </View>
       )}
