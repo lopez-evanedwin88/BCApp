@@ -15,6 +15,12 @@ const globalStyles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 8,
   },
+  paddingHorizontal4: {
+    paddingHorizontal: 4,
+  },
+  paddingVertical4: {
+    paddingVertical: 4,
+  },
   flexDirectionRow: {
     flexDirection: 'row',
   },

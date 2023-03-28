@@ -3,6 +3,7 @@ export const color = {
   white: '#FFFFFF',
   black2: '#000000',
   transparent: 'transparent',
+  gray: 'gray',
 };
 
 export const fonts = {
