@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
   imageStyle: {height: 50, width: 25},
   lineStyle: {
-    borderBottomColor: 'black',
+    borderBottomColor: color.black2,
     borderBottomWidth: StyleSheet.hairlineWidth,
     paddingVertical: 4,
     marginHorizontal: 120,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   emptyTextStyle: {
     fontSize: fonts.lg,
-    color: 'gray',
+    color: color.gray,
   },
 });
 

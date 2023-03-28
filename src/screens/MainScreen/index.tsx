@@ -41,7 +41,7 @@ const renderItem = ({item}: any) => (
           style={[styles.imageStyle, {height: 30}]}
         />
         <View style={styles.itemViews}>
-          <Text>{item.emailAddress}</Text>
+          <Text>{item.email_address}</Text>
         </View>
       </View>
       <View style={globalStyles.flexDirectionRow}>
@@ -51,69 +51,17 @@ const renderItem = ({item}: any) => (
           style={[styles.imageStyle, {height: 20}]}
         />
         <View style={styles.itemViews}>
-          <Text>{item.phoneNo}</Text>
+          <Text>{item.phone_number}</Text>
         </View>
       </View>
       <View style={styles.lineStyle} />
-      {/* <Text>{item.linkedInUrl}</Text> */}
     </View>
   </ImageBackground>
 );
 
 const MainScreen = ({navigation}: {navigation: any}) => {
-  // const persons: any = [
-  //   {
-  //     name: 'Dongski1',
-  //     occupation: 'Programmer1',
-  //     company: 'Company1',
-  //     emailAddress: 'dongski@gmail.com',
-  //     phoneNo: '94474046',
-  //     linkedInUrl: 'linked.com/evan-edwin-lopez',
-  //   },
-  //   {
-  //     name: 'Dongski1',
-  //     occupation: 'Programmer1',
-  //     company: 'Company1',
-  //     emailAddress: 'dongski@gmail.com',
-  //     phoneNo: '94474046',
-  //     linkedInUrl: 'linked.com/evan-edwin-lopez',
-  //   },
-  //   {
-  //     name: 'Dongski1',
-  //     occupation: 'Programmer1',
-  //     company: 'Company1',
-  //     emailAddress: 'dongski@gmail.com',
-  //     phoneNo: '94474046',
-  //     linkedInUrl: 'linked.com/evan-edwin-lopez',
-  //   },
-  //   {
-  //     name: 'Dongski1',
-  //     occupation: 'Programmer1',
-  //     company: 'Company1',
-  //     emailAddress: 'dongski@gmail.com',
-  //     phoneNo: '94474046',
-  //     linkedInUrl: 'linked.com/evan-edwin-lopez',
-  //   },
-  // ];
-
-  // const {useRealm} = RealmContext;
-  // const realm = useRealm();
-
-  // realm.write(() => {
-  //   const generatedObjectId = new BSON.ObjectId();
-  //   new Person(realm, {
-  //     _id: generatedObjectId,
-  //     name: 'Dongski1',
-  //     occupation: 'Programmer1',
-  //     company: 'Company1',
-  //     email_address: 'dongski@gmail.com',
-  //     phone_number: '94474046',
-  //     linkedIn_URL: 'linked.com/evan-edwin-lopez',
-  //     created_at: new Date().getTime(),
-  //   });
-  // });
-
-  const persons: any = [];
+  const {useQuery} = RealmContext;
+  const persons: any = useQuery(Person).sorted('created_at', true);
 
   return (
     <View style={[globalStyles.flex1, {backgroundColor: color.white}]}>
