@@ -7,12 +7,14 @@ interface CustomButtonProps extends ButtonProps {
   onPress: () => void;
   title: string;
   style?: StyleProp<any>;
+  textStyle?: StyleProp<any>;
 }
 
 const Button: FunctionComponent<CustomButtonProps> = ({
   onPress,
   title,
   style,
+  textStyle,
   ...props
 }) => {
   return (
@@ -20,7 +22,7 @@ const Button: FunctionComponent<CustomButtonProps> = ({
       {...props}
       onPress={onPress}
       style={[styles.button, style]}>
-      <Text style={styles.text}>{title}</Text>
+      <Text style={[styles.text, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 };

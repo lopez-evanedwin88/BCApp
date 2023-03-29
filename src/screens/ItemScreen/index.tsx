@@ -254,13 +254,23 @@ const ItemScreen = ({navigation, route}: {navigation: any; route: any}) => {
         </View>
       )}
       {!mode && (
-        <View style={globalStyles.padding8}>
-          <Button
-            style={{backgroundColor: color.red}}
-            title="Delete Item"
-            onPress={deletePerson}
-          />
-        </View>
+        <>
+          <View style={globalStyles.padding8}>
+            <Button
+              style={styles.exportBtnStyle}
+              title="Export as Phone Contact"
+              textStyle={{color: color.green}}
+              onPress={() => {}}
+            />
+          </View>
+          <View style={globalStyles.padding8}>
+            <Button
+              style={{backgroundColor: color.red}}
+              title="Delete Item"
+              onPress={deletePerson}
+            />
+          </View>
+        </>
       )}
     </View>
   );

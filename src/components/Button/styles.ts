@@ -6,9 +6,14 @@ const styles = StyleSheet.create({
     height: 45,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#007AFF',
+    backgroundColor: color.blue,
   },
-  text: {fontSize: 16, color: color.white},
+  text: {
+    fontSize: 16,
+    color: color.white,
+    textTransform: 'uppercase',
+    fontWeight: '500',
+  },
 });
 
 export default styles;

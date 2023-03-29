@@ -5,6 +5,7 @@ export const color = {
   transparent: 'transparent',
   gray: 'gray',
   red: 'red',
+  blue: '#007AFF',
 };
 
 export const fonts = {

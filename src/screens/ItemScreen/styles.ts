@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {fonts} from '../../styles/Base';
+import {color, fonts} from '../../styles/Base';
 import globalStyles from '../../styles/GlobalStyles';
 
 const styles = StyleSheet.create({
@@ -14,6 +14,11 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     flex: 0.1,
+  },
+  exportBtnStyle: {
+    borderColor: color.green,
+    borderWidth: 0.4,
+    backgroundColor: color.transparent,
   },
 });
 
