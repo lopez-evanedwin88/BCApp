@@ -9,6 +9,7 @@ import {RealmContext} from '../../realm/realmConfig';
 import {color} from '../../styles/Base';
 import globalStyles from '../../styles/GlobalStyles';
 import styles from './styles';
+import Contacts from 'react-native-contacts';
 
 const ItemScreen = ({navigation, route}: {navigation: any; route: any}) => {
   const {useRealm} = RealmContext;
@@ -24,8 +25,13 @@ const ItemScreen = ({navigation, route}: {navigation: any; route: any}) => {
   const [mode, setMode] = useState(true);
 
   useEffect(() => {
-    navigation.setOptions({title: 'Add Business Card'});
-  }, [navigation]);
+    navigation.setOptions({
+      title:
+        route.params.mode === Mode.VIEW
+          ? 'View Business Card'
+          : 'Add Business Card',
+    });
+  }, [navigation, route]);
 
   useLayoutEffect(() => {
     if (route.params.mode === Mode.VIEW) {
@@ -79,6 +85,7 @@ const ItemScreen = ({navigation, route}: {navigation: any; route: any}) => {
         linkedIn_URL: linkedIn,
         created_at: new Date().getTime(),
       });
+
       Alert.alert(
         'Created a business card',
         'You have successfully added a business card',
@@ -107,6 +114,7 @@ const ItemScreen = ({navigation, route}: {navigation: any; route: any}) => {
             realm.write(() => {
               realm.delete(route.params.person);
             });
+
             Alert.alert(
               'Succesfully removed',
               '',
@@ -133,6 +141,44 @@ const ItemScreen = ({navigation, route}: {navigation: any; route: any}) => {
         cancelable: false,
       },
     );
+  };
+
+  const exportToContacts = () => {
+    var newPerson = {
+      displayName: name,
+      givenName: name,
+      jobTitle: occupation,
+      company: company,
+      emailAddresses: [
+        {
+          label: 'work',
+          email: email,
+        },
+      ],
+      phoneNumbers: [
+        {
+          label: 'mobile',
+          number: contactNumber,
+        },
+      ],
+    };
+
+    Contacts.openContactForm(newPerson).then(contacts => {
+      contacts &&
+        Alert.alert(
+          'Successfully added to Contacts',
+          '',
+          [
+            {
+              text: 'OK',
+              style: 'cancel',
+            },
+          ],
+          {
+            cancelable: false,
+          },
+        );
+    });
   };
 
   return (
@@ -260,7 +306,7 @@ const ItemScreen = ({navigation, route}: {navigation: any; route: any}) => {
               style={styles.exportBtnStyle}
               title="Export as Phone Contact"
               textStyle={{color: color.green}}
-              onPress={() => {}}
+              onPress={exportToContacts}
             />
           </View>
           <View style={globalStyles.padding8}>
