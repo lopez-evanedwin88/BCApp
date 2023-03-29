@@ -18,7 +18,7 @@ import {color} from '../../styles/Base';
 import globalStyles from '../../styles/GlobalStyles';
 import styles from './styles';
 
-const MainScreen = ({navigation}: {navigation: any}) => {
+const ListScreen = ({navigation}: {navigation: any}) => {
   const {useQuery} = RealmContext;
   const persons: any = useQuery(Person).sorted('created_at', true);
 
@@ -105,4 +105,4 @@ const MainScreen = ({navigation}: {navigation: any}) => {
   );
 };
 
-export default MainScreen;
+export default ListScreen;

@@ -1,5 +1,5 @@
 export enum Route {
-  MAIN_SCREEN = 'MainScreen',
+  LIST_SCREEN = 'ListScreen',
   ITEM_SCREEN = 'ItemScreen',
 }
 
