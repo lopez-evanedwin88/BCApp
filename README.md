@@ -3,7 +3,7 @@
 A mobile business card application
 
 React Native: 0.71.4 \
-Ruby Version: 2.7.6 \ 
+Ruby Version: 2.7.6 
 
 ## Installation
 Setup react native cli https://reactnative.dev/docs/environment-setup 
