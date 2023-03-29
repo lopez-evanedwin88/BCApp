@@ -257,7 +257,7 @@ const ItemScreen = ({navigation, route}: {navigation: any; route: any}) => {
         <View style={globalStyles.padding8}>
           <Button
             style={{backgroundColor: color.red}}
-            title="Delete Business Card"
+            title="Delete Item"
             onPress={deletePerson}
           />
         </View>
